@@ -5,13 +5,20 @@ import Rank from '../application/Rank';
 import Recommend from '../application/Recommend';
 import Singers from '../application/Singers';
 import Test from '../Test';
+import Immer from '../Test/Immer';
 
 //Redirect重定向
 //exact默认为false，如果为true时，需要和路由相同时才能匹配，
 export default  [
     {
         path:'/test',
-        component:Test
+        component:Test,
+        routes:[
+            {
+                path: '/test/immer' ,
+                component: Immer ,
+            },
+        ]
     },
     {
         path: '/' ,

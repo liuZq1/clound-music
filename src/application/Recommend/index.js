@@ -13,7 +13,7 @@ function Recommend() {
             id:index,
             picUrl:'https://qpic.y.qq.com/music_cover/iac4gWQcWqkC36AxKFfGmOe5P1DjJ95qoTyBoKHaXEqd9D4icTfxzplA/300?n=1',
             playCount: 17171122,
-            name: "朴树、许巍、李健、郑钧、老狼、赵雷"
+            name: "朴树、许巍、李健、郑钧、老狼、赵雷朴树、许巍、李健、郑钧、老狼、赵雷"
         }
     })
     return (

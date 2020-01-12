@@ -15,7 +15,7 @@ const ListWrapper = styled.div`
 const List = styled.div`
     width:100%;
     display:flex;
-    flex-dictionary:row;
+    flex-direction:row;
     flex-wrap:wrap;
     justify-content:space-around;
 `;

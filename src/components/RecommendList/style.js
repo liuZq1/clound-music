@@ -68,7 +68,7 @@ const ListItem = styled.div`
         padding:0 2px;
         height:50px;
         font-size:${style['font-size-s']};
-        color: ${style ["font-color-desc"]};
+        color:${style["font-color-desc"]};
         line-height:1.4;
         text-align:left;
     }

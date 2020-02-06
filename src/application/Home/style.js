@@ -19,7 +19,7 @@ const Top = styled.div`
 
 const Tab = styled.div`
     display:flex;
-    flex-dictionary:row;
+    flex-direction:row;
     height:44px;
     justify-content:space-around;
     background:${style["theme-color"]};
@@ -42,7 +42,7 @@ const Tab = styled.div`
 
 const TabItem = styled.div`
     display:flex;
-    flex-dictionary:row;
+    flex-direction:row;
     justify-content:center;
     align-items:center;
     height:100%;

@@ -1,6 +1,15 @@
 import React,{useEffect,useState,useLayoutEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import { renderRoutes } from "react-router-config";
+import styled from 'styled-components';
+
+const Header = styled.div`
+    display:flex;
+    justify-content: space-around;
+    a{
+        color:red;
+    }
+`;
 
 function getSize() {
     return {
@@ -49,8 +58,11 @@ function Test(props) {
 
     return (
         <div>
+            <Header>
+                <NavLink to="/test/immer">immer</NavLink>
+                <NavLink to="/test/memo">memo</NavLink>
+            </Header>
             {windowSize.innerWidth}
-            <NavLink to="/test/immer">immer</NavLink>
             { renderRoutes (route.routes) }
         </div>
     )

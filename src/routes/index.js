@@ -6,6 +6,7 @@ import Recommend from '../application/Recommend';
 import Singers from '../application/Singers';
 import Test from '../Test';
 import Immer from '../Test/Immer';
+import Memo from '../Test/UseMemo';
 
 //Redirect重定向
 //exact默认为false，如果为true时，需要和路由相同时才能匹配，
@@ -17,6 +18,10 @@ export default  [
             {
                 path: '/test/immer' ,
                 component: Immer ,
+            },
+            {
+                path: '/test/memo' ,
+                component: Memo ,
             },
         ]
     },

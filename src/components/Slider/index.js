@@ -8,20 +8,16 @@ function Slider( props ) {
     const { bannerList } = props;
 
     useEffect (() => {
-        if (bannerList.length && !sliderSwiper){
-            let sliderSwiper = new Swiper (".slider-container", {
+        if(bannerList.length && !sliderSwiper){
+            let sliderSwiper = new Swiper(".slider-container", {
               loop: true,
               autoplay: true,
               autoplayDisableOnInteraction: false,
               pagination: {el:'.swiper-pagination'},
             });
-            setSliderSwiper (sliderSwiper);
+            setSliderSwiper(sliderSwiper);
         }
-        //可以使用 useEffect 处理副作用
-        return () => {
-            setSliderSwiper(null)
-        }
-      }, []);
+      }, [bannerList.length, sliderSwiper]);
  
     
     return (
@@ -30,10 +26,10 @@ function Slider( props ) {
             <div className="slider-container">
                 <div className="swiper-wrapper">
                 {
-                     bannerList.map(slider => {
+                     bannerList.map((slider,index) => {
                          return (
-                              <div key={slider.imgUrl} className="swiper-slide">
-                                <img src={slider.imgUrl} width="100%" height="100%" alt="推荐"/>
+                              <div key={slider.imageUrl} className="swiper-slide">
+                                <img src={slider.imageUrl} width="100%" height="100%" alt="推荐"/>
                              </div>
                             )
                      })

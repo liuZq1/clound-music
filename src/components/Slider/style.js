@@ -10,8 +10,9 @@ export const SliderContainer = styled.div`
     background: white;
     .before{
         position:absolute;
+        top:-300px;
         width:100%;
-        height:60%;
+        height:400px;
         background: ${style["theme-color"]};
     }
 

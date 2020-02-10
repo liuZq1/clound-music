@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux-immutable';
-import {reducer as recomendReducer } from '../application/Recommend/store/index';
+import {reducer as recommendReducer } from '../application/Recommend/store';
+import {reducer as singersReducer } from '../application/Singers/store';
 
 export default combineReducers ({
-    recommend : recomendReducer
+    recommend : recommendReducer,
+    singers: singersReducer
 });

@@ -1,3 +1,4 @@
+//计算数量
 const getCount = (count) => {
     if (count < 0) return;
     if (count < 10000) {
@@ -9,8 +10,21 @@ const getCount = (count) => {
     }
 };
 
-
+//防抖函数
+const debounce = (func,delay) => {
+    return function (...args) {
+        let timer;
+        if(timer){
+            clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+            func.apply (this, args);
+            clearTimeout (timer);
+        },delay)
+    }
+};
 
 export {
-    getCount
+    getCount,
+    debounce
 }

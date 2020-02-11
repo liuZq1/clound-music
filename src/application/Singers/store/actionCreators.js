@@ -51,7 +51,7 @@ const refreshMoreHotSingerList = () => (dispatch,getState) => {
     const singerList = getState().getIn(['singers','singerList']).toJS();
 
     getHotSingerListRequest(pageCount).then(res => {
-        const data = [...singerList,res.artists];
+        const data = [...singerList,...res.artists];
         dispatch(changeSingerList(data));
         dispatch(changePullUpLoading(false));
     }).catch( () => {

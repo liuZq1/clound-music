@@ -1,36 +1,30 @@
-import React,{useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { connect  } from "react-redux";
 import Horizontal from '../../baseUI/Horizontal-item';
 import { categoryTypes,alphaTypes } from '../../api/config';
-import { NavContainer ,ListContainer,List,ListItem } from './styled';
+import { NavContainer ,ListContainer,List,ListItem } from './style';
 import Scroll from '../../baseUI/Scroll';
 import { actionTypes } from './store';
 import Loading from '../../baseUI/Loading';
 import LazyLoad, {forceCheck} from 'react-lazyload';
-
 //用react hook模拟reducer
-
-
-//mock数据
-const singerList = [1,2,3,4,5,6,7,8,9,10,11,12].map(item => ({
-    picUrl: "https://p2.music.126.net/uTwOm8AEFFX_BYHvfvFcmQ==/109951164232057952.jpg",
-    name: "隔壁老樊",
-    accountId: 277313426,
-}));
+import { CategoryDataContext,CHANGE_ALPHA,CHANGE_CATEGORY } from './data';
 
 
 //渲染函数,返回歌手列表
-const renderSingerList = () => {
+const renderSingerList = (singerList) => {
+    const list = singerList ? singerList.toJS() : [];
+
     return (
         <List>
             {
-                singerList.map((item,index) => {
+                list.map((item,index) => {
                     return (
                         <ListItem key={item.accountId+"" +index}>
                             <div className={"img_wrapper"}>
                                 {/*img 标签外部包裹一层 LazyLoad*/}
                                 <LazyLoad placeholder={<img src={require('./singer.png')} width="100%" height="100%" alt="music"/>}>
-                                    <img src={`${item.picUrl}?param=300*300`} alt="music" width={"100%"} height={"100%"}/>
+                                    <img src={item.picUrl ?`${item.picUrl}?param=300*300`:require('./singer.png')} alt="music" width={"100%"} height={"100%"}/>
                                 </LazyLoad>
                             </div>
                             <span className="name">{item.name}</span>
@@ -45,19 +39,29 @@ const renderSingerList = () => {
 
 
 function Singers( props ) {
-    const [ category,setCategory ] = useState('');
-    const [ alpha,setAlpha ] = useState('');
+    const {data,dispatch} = useContext(CategoryDataContext);
+    const { category, alpha } = data.toJS ();
 
-    const { pullUpLoading,pullDownLoading,pullUpRefreshDispatch,pullDownRefreshDispatch } = props;
-    const { pageCount,enterLoading } = props;
-    console.log(props);
+    const { getHotSingerDispatch,pullUpLoading,pullDownLoading,
+        pullUpRefreshDispatch,pullDownRefreshDispatch,updateDispatch } = props;
+    const { pageCount,enterLoading,singerList } = props;
+
+    useEffect(()=>{
+        if(!singerList.size > 0){
+            getHotSingerDispatch()
+        }
+        // eslint-disable-next-line
+    },[]);
+
     //点击分类
     let handleCategory = (val) => {
-        setCategory(val);
+        dispatch({type:CHANGE_CATEGORY,data:val});
+        updateDispatch(val,alpha)
     };
     //点击字母
     let handleAlpha = (val) => {
-      setAlpha(val);
+        dispatch({type:CHANGE_ALPHA,data:val});
+        updateDispatch(category,val)
     };
 
     let handlePullUp = () => {
@@ -91,7 +95,7 @@ function Singers( props ) {
                     pullUp={handlePullUp}
                     pullDown={handlePullDown}
                 >
-                    { renderSingerList() }
+                    { renderSingerList(singerList) }
                 </Scroll>
             </ListContainer>
         </NavContainer>

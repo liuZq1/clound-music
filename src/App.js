@@ -17,7 +17,6 @@ function App() {
                 <Data>
                     { renderRoutes(routes) }
                 </Data>
-
             </HashRouter>
         </Provider>
   );

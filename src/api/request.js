@@ -19,10 +19,16 @@ const getSingerListRequest = (category,alpha,count) => {
     return axiosInstace.get(`/artist/list?cat=${category}&initial=${alpha.toLowerCase()}&offset=${count}`)
 };
 
+//获取排行榜
+const getRankListRequest = () => {
+    return axiosInstace.get(`/toplist/detail`)
+};
+
 
 export {
     getBannerRequest,
     getRecommendListRequest,
     getHotSingerListRequest,
-    getSingerListRequest
+    getSingerListRequest,
+    getRankListRequest
 };

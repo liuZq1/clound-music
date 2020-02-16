@@ -7,7 +7,16 @@ const extendClick = () => {
       top: -10px; bottom: -10px; left: -10px; right: -10px;
     };
   `
-}
+};
+
+const noWrap = () => {
+    return `
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  `
+};
+
 
 export default {
     'theme-color': '#d44439',
@@ -24,5 +33,6 @@ export default {
     'background-color': '#f2f3f4',
     'background-color-shadow': 'rgba (0, 0, 0, 0.3)',
     'highlight-background-color': '#fff',
-    extendClick
+    extendClick,
+    noWrap
 };

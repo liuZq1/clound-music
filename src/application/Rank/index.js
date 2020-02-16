@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import { connect } from "react-redux";
 import { actionTypes } from './store';
-import { filterIndex,filterIdx } from '../../api/utils';
+import { filterIndex } from '../../api/utils';
 import {
     Container,
     List,
@@ -9,14 +9,12 @@ import {
     SongList
 } from "./style";
 import Scroll from '../../baseUI/Scroll';
+import {renderRoutes} from "react-router-config";
 
 
-const enterDetail = (name) => {
-    const idx = filterIdx(name);
-    if(idx === null) {
-        alert("暂无相关数据");
-        return;
-    }
+const enterDetail = (props,detail) => {
+    console.log(props);
+    props.history.push (`/rank/${detail.id}`)
 };
 
 
@@ -33,7 +31,7 @@ const renderSong = (list) => {
 };
 
 //这是渲染榜单列表函数，传入 global 变量来区分不同的布局方式
-const renderRankList = (list,global) => {
+const renderRankList = (list,global,props) => {
     return (
         <List globalRank={global}>
             {
@@ -42,7 +40,7 @@ const renderRankList = (list,global) => {
                         <ListItem
                             key={item.coverImgUrl}
                             tracks={item.tracks}
-                            onClick={() => enterDetail(item.name)}
+                            onClick={() => enterDetail(props,item)}
                         >
                             <div className={"img_wrapper"}>
                                 <img src={item.coverImgUrl} alt=""/>
@@ -90,11 +88,12 @@ function Rank( props ) {
             <Scroll>
                 <div>
                     <h1 style={displayStyle} className={"offical"}>官方榜</h1>
-                    {renderRankList(officialList)}
+                    {renderRankList(officialList,false,props)}
                     <h1 style={displayStyle} className={"global"}>全球榜</h1>
-                    {renderRankList(globalList,true)}
+                    {renderRankList(globalList,true,props)}
                 </div>
             </Scroll>
+            { renderRoutes (props.route.routes) }
         </Container>
     )
 }

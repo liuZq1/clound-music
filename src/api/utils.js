@@ -37,9 +37,25 @@ const filterIdx = () => {
 
 };
 
+const getName = (list) => {
+    let str = "";
+    list.map ((item, index) => {
+        str += index === 0 ? item.name : "/" + item.name;
+        return item;
+    });
+    return str;
+};
+
+//判断一个对象是否为空
+const isEmptyObject = (obj) => {
+    return !obj || Object.keys (obj).length === 0;
+};
+
 export {
     getCount,
     debounce,
     filterIndex,
-    filterIdx
+    filterIdx,
+    getName,
+    isEmptyObject
 }

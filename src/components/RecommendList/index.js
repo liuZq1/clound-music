@@ -6,16 +6,22 @@ import {
 } from './style';
 import { getCount } from "../../api/utils";
 import LazyLoad from 'react-lazyload';
+import { withRouter } from "react-router-dom";
 
-function RecommendList({recommendList}) {
+function RecommendList(props) {
+
+    const enterDetail = (id) => {
+        props.history.push(`/recommend/${id}`)
+    };
+
     return (
         <ListWrapper>
             <h1 className="title">推荐歌单</h1>
             <List>
                 {
-                    recommendList.map((item,index) => {
+                    props.recommendList.map((item,index) => {
                         return (
-                            <ListItem key={item.id+index}>
+                            <ListItem key={item.id+index} onClick={() => enterDetail(item.id)}>
                                 {/*遮罩层*/}
                                 <div className="img_wrapper">
                                     <div className="decorate"></div>
@@ -39,4 +45,4 @@ function RecommendList({recommendList}) {
     )
 }
 
-export default RecommendList;
+export default React.memo(withRouter(RecommendList));

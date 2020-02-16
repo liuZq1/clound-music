@@ -9,10 +9,14 @@ import Loading from '../../baseUI/Loading';
 import LazyLoad, {forceCheck} from 'react-lazyload';
 //用react hook模拟reducer
 import { CategoryDataContext,CHANGE_ALPHA,CHANGE_CATEGORY } from './data';
+import { renderRoutes } from "react-router-config";
 
+const enterDetail = (props,id) => {
+    props.history.push (`/singers/${id}`);
+};
 
 //渲染函数,返回歌手列表
-const renderSingerList = (singerList) => {
+const renderSingerList = (singerList,props) => {
     const list = singerList ? singerList.toJS() : [];
 
     return (
@@ -20,7 +24,7 @@ const renderSingerList = (singerList) => {
             {
                 list.map((item,index) => {
                     return (
-                        <ListItem key={item.accountId+"" +index}>
+                        <ListItem key={item.accountId+"" +index} onClick={() => enterDetail(props,item.id)}>
                             <div className={"img_wrapper"}>
                                 {/*img 标签外部包裹一层 LazyLoad*/}
                                 <LazyLoad placeholder={<img src={require('./singer.png')} width="100%" height="100%" alt="music"/>}>
@@ -73,32 +77,36 @@ function Singers( props ) {
     };
 
     return (
-        <NavContainer>
-            <Horizontal
-                list={categoryTypes}
-                title={"分类 (默认热门):"}
-                handleClick={ (val) => handleCategory(val) }
-                oldVal={category}
-            />
-            <Horizontal
-                list={alphaTypes}
-                title={"首字母:"}
-                handleClick={ (val) => handleAlpha(val) }
-                oldVal={alpha}
-            />
-            <ListContainer>
-                {enterLoading ? <Loading/> : null}
-                <Scroll
-                    onScroll={forceCheck}
-                    pullDownLoading={pullDownLoading}
-                    pullUpLoading={pullUpLoading}
-                    pullUp={handlePullUp}
-                    pullDown={handlePullDown}
-                >
-                    { renderSingerList(singerList) }
-                </Scroll>
-            </ListContainer>
-        </NavContainer>
+        <div>
+            <NavContainer>
+                <Horizontal
+                    list={categoryTypes}
+                    title={"分类 (默认热门):"}
+                    handleClick={ (val) => handleCategory(val) }
+                    oldVal={category}
+                />
+                <Horizontal
+                    list={alphaTypes}
+                    title={"首字母:"}
+                    handleClick={ (val) => handleAlpha(val) }
+                    oldVal={alpha}
+                />
+                <ListContainer>
+                    {enterLoading ? <Loading/> : null}
+                    <Scroll
+                        onScroll={forceCheck}
+                        pullDownLoading={pullDownLoading}
+                        pullUpLoading={pullUpLoading}
+                        pullUp={handlePullUp}
+                        pullDown={handlePullDown}
+                    >
+                        { renderSingerList(singerList,props) }
+                    </Scroll>
+                </ListContainer>
+            </NavContainer>
+            {renderRoutes(props.route.routes)}
+        </div>
+
     )
 }
 

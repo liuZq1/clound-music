@@ -7,6 +7,7 @@ import { Content } from './style';
 import Scroll from '../../baseUI/Scroll';
 import { forceCheck } from 'react-lazyload';
 import Loading from '../../baseUI/Loading';
+import { renderRoutes } from 'react-router-config';
 
 /*
 *了视口内的图片显示真实资源，视口外则显示占位图片，需要forceCheck
@@ -44,6 +45,7 @@ function Recommend(props) {
                 </div>
             </Scroll>
             {enterLoading ? <Loading></Loading> : null}
+            {renderRoutes(props.route.routes)}
         </Content>
     )
 }

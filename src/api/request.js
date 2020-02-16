@@ -24,11 +24,17 @@ const getRankListRequest = () => {
     return axiosInstace.get(`/toplist/detail`)
 };
 
+//获取专辑
+const getAlbumDetailRequest = (id) => {
+    return axiosInstace.get(`/playlist/detail?id=${id}`)
+};
+
 
 export {
     getBannerRequest,
     getRecommendListRequest,
     getHotSingerListRequest,
     getSingerListRequest,
-    getRankListRequest
+    getRankListRequest,
+    getAlbumDetailRequest
 };

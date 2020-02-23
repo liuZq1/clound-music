@@ -77,7 +77,13 @@ const CollectButton = styled.div`
 `;
 
 const BgLayer = styled.div`
-
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  z-index: 50;
 `;
 
 const SongListWrapper = styled.div`
@@ -87,7 +93,6 @@ const SongListWrapper = styled.div`
   top: 0;
   bottom: 0;
   z-index: 50;
-  background: red;
   > div{
     position: absolute;
     left: 0;

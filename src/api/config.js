@@ -188,8 +188,12 @@ const alphaTypes = [
     }
 ];
 
+//顶部的高度
+const HEADER_HEIGHT = 45;
+
 export {
     axiosInstace,
     categoryTypes,
-    alphaTypes
+    alphaTypes,
+    HEADER_HEIGHT
 }

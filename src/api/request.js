@@ -29,6 +29,11 @@ const getAlbumDetailRequest = (id) => {
     return axiosInstace.get(`/playlist/detail?id=${id}`)
 };
 
+//获取歌手跟单
+const getSingerInfoRequest = (id) => {
+    return axiosInstace.get(`/artists?id=${id}`)
+};
+
 
 export {
     getBannerRequest,
@@ -36,5 +41,6 @@ export {
     getHotSingerListRequest,
     getSingerListRequest,
     getRankListRequest,
-    getAlbumDetailRequest
+    getAlbumDetailRequest,
+    getSingerInfoRequest
 };

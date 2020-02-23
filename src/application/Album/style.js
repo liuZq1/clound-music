@@ -143,99 +143,10 @@ const Menu = styled.div`
   }
 `;
 
-const SongList = styled.div`
-   border-radius: 10px;
-   opacity: 0.98;
-   background: ${style["highlight-background-color"]};
-  .first_line{
-    position: relative;
-    border-bottom: 1px solid ${style["border-color"]};
-    box-sizing: border-box;
-    padding: 10px 0;
-    margin-left: 10px;
-    .play_all{
-      line-height: 24px;
-      display: inline-block;
-      color: ${style["font-color-desc"]};
-      .iconfont{
-        font-size: 24px;
-        margin-right: 10px;
-        vertical-align: top;
-      }
-      .sum{
-        font-size: ${style["font-size-s"]};
-        color: ${style["font-color-desc-v2"]};
-      }
-      >span{
-        vertical-align: top;
-      }
-    }
-  }
-  .add_list{
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 130px;
-    line-height: 34px;
-    background: ${style["theme-color"]};
-    color: ${style["font-color-light"]};
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    vertical-align: top;
-    font-size: 0;
-    .iconfont {
-        vertical-align: top;
-        font-size: 10px;
-        margin: 0 5px 0 10px;
-      }
-      span {
-        font-size: 14px;
-        line-height: 34px;
-      }
-  }
-`;
 
-const SongItem = styled.ul`
-  > li{
-    display: flex;
-    align-items: center;
-    height: 60px;
-    .index{
-      flex-basis: 60px;
-      width: 60px;
-      text-align: center;
-      height: 100%;
-      line-height: 60px;
-    }
-    .info{
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      height: 100%;
-      padding: 5px 0;
-      justify-content: space-around;
-      border-bottom: 1px solid ${style["border-color"]};
-      ${style.noWrap()}
-      >span{
-        ${style.noWrap()}
-      }
-      >span:first-child{
-        color: ${style["font-color-desc"]};
-      }
-      >span:last-child{
-        font-size: ${style["font-size-s"]};
-        color: #bba8a8;
-      }
-    }
-  }
-`;
 
 export {
     Container,
     TopDesc,
     Menu,
-    SongList,
-    SongItem
 }

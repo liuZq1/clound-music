@@ -27,7 +27,7 @@ function Singer(props) {
     useEffect(() => {
         const id = props.match.params.id;
         getSingerDataDispatch (id);
-        //eslint-next-disable-line
+        //eslint-disable-next-line
     },[]);
 
     const collectButton = useRef ();

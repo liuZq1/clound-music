@@ -13,7 +13,6 @@ import {renderRoutes} from "react-router-config";
 
 
 const enterDetail = (props,detail) => {
-    console.log(props);
     props.history.push (`/rank/${detail.id}`)
 };
 

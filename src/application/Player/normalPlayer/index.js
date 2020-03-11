@@ -6,11 +6,13 @@ import {
     Middle,
     CDWrapper,
     Bottom,
+    ProgressWrapper,
     Operators
 } from './style';
 import {CSSTransition} from "react-transition-group";
 import animations from 'create-keyframe-animation';
 import {prefixStyle} from "../../../api/utils";
+import ProgressBar from "../../../baseUI/progressBar";
 
 function NormalPlayer(props) {
     const {song,fullScreen} = props;
@@ -134,6 +136,13 @@ function NormalPlayer(props) {
                     </CDWrapper>
                 </Middle>
                 <Bottom>
+                    <ProgressWrapper>
+                        <span className="time time-l">0:00</span>
+                        <div className="progress-bar-wrapper">
+                            <ProgressBar percent={0.2}></ProgressBar>
+                        </div>
+                        <div className="time time-r">4:17</div>
+                    </ProgressWrapper>
                     <Operators>
                         <div className={"icon i-left"}>
                             <i className="iconfont">&#xe625;</i>

@@ -66,17 +66,26 @@ const MiniPlayerContainer = styled.div`
       ${style.noWrap()}
     }
     .desc {
-      font-size: ${style ["font-size-s"]};
-      color: ${style ["font-color-desc-v2"]};
+      font-size: ${style["font-size-s"]};
+      color: ${style["font-color-desc-v2"]};
       ${style.noWrap ()}
     }
   }
   .control{
-     flex: 0 0 30px;
-     padding: 0 10px;
-     .iconfont, .icon-playlist {
+    flex: 0 0 30px;
+    padding: 0 10px;
+    .iconfont, .icon-playlist{
       font-size: 30px;
       color: ${style["theme-color"]};
+    }
+    .icon-mini{
+      font-size: 16px;
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      &.icon-play{
+        left: 9px
+      }
     }
   }
 `;

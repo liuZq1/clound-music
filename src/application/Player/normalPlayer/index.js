@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React,{useRef,useMemo} from 'react';
 import {  getName } from "../../../api/utils";
 import {
     NormalPlayerContainer,
@@ -13,10 +13,13 @@ import {CSSTransition} from "react-transition-group";
 import animations from 'create-keyframe-animation';
 import {prefixStyle} from "../../../api/utils";
 import ProgressBar from "../../../baseUI/progressBar";
+import {formatPlayTime} from "../../../api/utils";
+import {playMode} from "../../../api/config";
+
 
 function NormalPlayer(props) {
-    const {song,fullScreen} = props;
-    const { toggleFullScreenDispatch } = props;
+    const { song, fullScreen, playing, percent, duration, currentTime,mode, } =  props;
+    const { toggleFullScreen, clickPlaying, onProgressChange,handlePrev,handleNext,changeMode } = props;
 
     const normalPlayerRef = useRef ();
     const cdWrapperRef = useRef ();
@@ -95,6 +98,20 @@ function NormalPlayer(props) {
         cdWrapperDom.style.animation = "";
     };
 
+    //根据mode不同决定图标样式
+    const getPlayMode = useMemo(() => {
+        let content;
+        console.log(mode);
+        if (mode === playMode.sequence) {
+            content = "&#xe625;";
+        } else if (mode === playMode.loop) {
+            content = "&#xe653;";
+        } else {
+            content = "&#xe61b;";
+        }
+        return content;
+    },[mode]);
+
     return (
         <CSSTransition
             className={"normal"}
@@ -118,7 +135,7 @@ function NormalPlayer(props) {
                 </div>
                 <div className={"background layer"}></div>
                 <Top>
-                    <div className={"back"} onClick={() => toggleFullScreenDispatch(false)}>
+                    <div className={"back"} onClick={() => toggleFullScreen(false)}>
                         <i className={"iconfont icon-back"}>&#xe662;</i>
                     </div>
                     <h1 className="title">{song.name}</h1>
@@ -128,7 +145,7 @@ function NormalPlayer(props) {
                     <CDWrapper>
                         <div className={"cd"}>
                             <img
-                                className="image play"
+                                className={`image play ${playing ? "" : "pause"}`}
                                 src={song.al.picUrl + "?param=400x400"}
                                 alt="图片"
                             />
@@ -137,23 +154,38 @@ function NormalPlayer(props) {
                 </Middle>
                 <Bottom>
                     <ProgressWrapper>
-                        <span className="time time-l">0:00</span>
+                        <span className="time time-l">{formatPlayTime(currentTime)}</span>
                         <div className="progress-bar-wrapper">
-                            <ProgressBar percent={0.2}></ProgressBar>
+                            <ProgressBar
+                                percent={percent}
+                                percentChange={onProgressChange}
+                            ></ProgressBar>
                         </div>
-                        <div className="time time-r">4:17</div>
+                        <div className="time time-r">{formatPlayTime(duration)}</div>
                     </ProgressWrapper>
                     <Operators>
-                        <div className={"icon i-left"}>
-                            <i className="iconfont">&#xe625;</i>
+                        <div
+                            className={"icon i-left"}
+                            onClick={changeMode}
+                        >
+                            <i
+                                className="iconfont"
+                                dangerouslySetInnerHTML={{ __html: getPlayMode }}
+                            ></i>
                         </div>
-                        <div className="icon i-left">
+                        <div className="icon i-left" onClick={handlePrev}>
                             <i className="iconfont">&#xe6e1;</i>
                         </div>
                         <div className="icon i-center">
-                            <i className="iconfont">&#xe723;</i>
+                            <i
+                                className="iconfont"
+                                onClick={e => clickPlaying(e, !playing)}
+                                dangerouslySetInnerHTML={{
+                                    __html: playing ? "&#xe723;" : "&#xe731;"
+                                }}
+                            ></i>
                         </div>
-                        <div className="icon i-right">
+                        <div className="icon i-right" onClick={handleNext}>
                             <i className="iconfont">&#xe718;</i>
                         </div>
                         <div className="icon i-right">

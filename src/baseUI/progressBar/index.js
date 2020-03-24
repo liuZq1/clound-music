@@ -1,6 +1,7 @@
-import React,{useEffect,useRef,useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import style from '../../assets/global-style';
+import {prefixStyle} from "../../api/utils";
 
 
 const ProgressBarWrapper = styled.div`
@@ -37,12 +38,36 @@ const ProgressBarWrapper = styled.div`
 `;
 
 function ProgressBar(props) {
+    const transform = prefixStyle('transform');
+
+    const { percent } = props;
+
+    const { percentChange } = props;
+
+
     const progressBar = useRef ();
     const progress = useRef ();
     const progressBtn = useRef ();
     const [touch, setTouch] = useState ({});
 
     const progressBtnWidth = 16;
+
+    //监听percent
+    useEffect(() => {
+        if(percent >=0 && percent <=1 && !touch.initiated){
+            const barWidth = progressBar.current.clientWidth -progressBtnWidth;
+            const offsetWidth = percent * barWidth;
+            progress.current.style.width = `${offsetWidth}px`;
+            progressBtn.current.style[transform] = `translate3d(${offsetWidth}px, 0, 0)`;
+        };
+        // eslint-disable-next-line
+    },[percent]);
+
+    const _changePercent = () => {
+        const barWidth = progressBar.current.clientWidth - progressBtnWidth;
+        const curPercent = progress.current.clientWidth / barWidth;
+        percentChange(curPercent);
+    };
 
     //处理进度条偏移量
     const _offset = (offSetWidth) => {
@@ -72,6 +97,7 @@ function ProgressBar(props) {
         const endTouch = JSON.parse(JSON.stringify(touch));
         endTouch.initiated = false;
         setTouch(endTouch);
+        _changePercent();
     };
 
     //点击进度条
@@ -79,6 +105,7 @@ function ProgressBar(props) {
         const rect = progressBar.current.getBoundingClientRect ();
         const offsetWidth = e.pageX - rect.left;
         _offset (offsetWidth);
+        _changePercent();
     };
 
     return (

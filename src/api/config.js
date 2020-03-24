@@ -193,9 +193,9 @@ const HEADER_HEIGHT = 45;
 
 //播放模式
 const playMode = {
-    sequence: 0,
-    loop: 1,
-    random: 2
+    sequence: 0, //顺序模式
+    loop: 1, //单曲循环
+    random: 2 //随机播放
 };
 
 export {
